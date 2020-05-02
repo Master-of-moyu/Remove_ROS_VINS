@@ -82,6 +82,8 @@ Eigen::Vector3d tmp_Bg;
 Eigen::Vector3d acc_0;
 Eigen::Vector3d gyr_0;
 
+// std::ofstream ofs_pose;
+
 queue<pair<cv::Mat, double>> image_buf;
 LoopClosure *loop_closure;
 KeyFrameDatabase keyframe_database;
@@ -269,10 +271,13 @@ void update()
     acc_0 = estimator.acc_0;
     gyr_0 = estimator.gyr_0;
 
+    // double dStamp = estimator.Headers[WINDOW_SIZE];
+    // ofs_pose << fixed << dStamp << " " << tmp_P(0) << " " << tmp_P(1) << " " << tmp_P(2) << " "
+    //          << tmp_Q.x() << " " << tmp_Q.y() << " " << tmp_Q.z() << " " << tmp_Q.w() << endl;
+
     queue<sensor_msgs::ImuConstPtr> tmp_imu_buf = imu_buf;
     for (sensor_msgs::ImuConstPtr tmp_imu_msg; !tmp_imu_buf.empty(); tmp_imu_buf.pop())
         predict(tmp_imu_buf.front());
-
 }
 
 std::vector<std::pair<std::vector<sensor_msgs::ImuConstPtr>, sensor_msgs::PointCloudConstPtr>>
@@ -1014,6 +1019,12 @@ int main(int argc, char **argv)
 	cerr << endl << "Usage: ./vins_estimator path_to_setting_file path_to_image_folder path_to_times_file path_to_imu_data_file" <<endl;
 	return 1;
     }
+
+  /// save result: pose && orientation
+  // ofs_pose.open("./estimate_result.txt", fstream::out);
+  // if (!ofs_pose.is_open()) {
+  //   cerr << "ofs_pose is not open" << endl;
+  // }
     
     //imu data file 
     ifstream fImus;
