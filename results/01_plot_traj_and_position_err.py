@@ -137,44 +137,44 @@ if __name__=="__main__":
     ax1.plot(traj_gt[:,0], traj_gt[:,1], traj_gt[:,2], linestyle='--', linewidth=1.0, color='r', label='ground truth')
     ax1.plot([traj_gt[0, 0]], [traj_gt[0, 1]], [traj_gt[0, 2]], 'o', markersize=4, color='r', label='start point')
     plot_traj(ax1, second_stamps, second_xyz_full_aligned.transpose().A, '-', 0.8, 'b', 'estimate')
-    ax1.set_xlabel('x [m]', fontsize=10)
-    ax1.set_ylabel('y [m]', fontsize=10)
-    ax1.set_zlabel('z [m]', fontsize=10)
-    ax1.tick_params(labelsize=8)
+    ax1.set_xlabel('x [m]', fontsize=8)
+    ax1.set_ylabel('y [m]', fontsize=8)
+    ax1.set_zlabel('z [m]', fontsize=8)
+    ax1.tick_params(labelsize=7)
     ax1.legend(loc='upper right', fontsize=7, edgecolor='w')
     ax1.grid(linestyle="--")
 
     ###    plot trajectory x/y/z    ###
-    time1 = []
-    pose_x_est = []
-    pose_y_est = []
-    pose_z_est = []
-    for (a,b),(x1,y1,z1),(x2,y2,z2) in zip(matches,first_xyz.transpose().A, second_xyz_aligned.transpose().A):
-        time1.append(b-traj_gt_time[0])
-        pose_x_est.append(x2)
-        pose_y_est.append(y2)
-        pose_z_est.append(z2)
-    fig2, (ax21, ax22, ax23) = plt.subplots(3, 1, figsize=(6, 3.5), sharex=True)
-    ## x
-    ax21.plot(traj_gt_time_relative, traj_gt[:,0], linestyle='--', linewidth=1.0, color='r', label='ground truth')
-    ax21.plot(time1, pose_x_est, linestyle='-', linewidth=0.8, color='b', label='estimate')
-    ax21.set_ylabel('x [m]', fontsize=10)
-    ax21.tick_params(labelsize=9)
-    ax21.legend(loc='upper right', fontsize=6, edgecolor='w')
-    ax21.grid(linestyle="--")
-    ## y
-    ax22.plot(traj_gt_time_relative, traj_gt[:,1], linestyle='--', linewidth=1.0, color='r')
-    ax22.plot(time1, pose_y_est, linestyle='-', linewidth=0.8, color='b')
-    ax22.set_ylabel('y [m]', fontsize=10)
-    ax22.tick_params(labelsize=9)
-    ax22.grid(linestyle="--")
-    ## z
-    ax23.plot(traj_gt_time_relative, traj_gt[:,2], linestyle='--', linewidth=1.0, color='r')
-    ax23.plot(time1, pose_z_est, linestyle='-', linewidth=0.8, color='b')
-    ax23.set_xlabel('t [s]', fontsize=10)
-    ax23.set_ylabel('z [m]', fontsize=10)
-    ax23.tick_params(labelsize=9)
-    ax23.grid(linestyle="--")
+    # time1 = []
+    # pose_x_est = []
+    # pose_y_est = []
+    # pose_z_est = []
+    # for (a,b),(x1,y1,z1),(x2,y2,z2) in zip(matches,first_xyz.transpose().A, second_xyz_aligned.transpose().A):
+    #     time1.append(b-traj_gt_time[0])
+    #     pose_x_est.append(x2)
+    #     pose_y_est.append(y2)
+    #     pose_z_est.append(z2)
+    # fig2, (ax21, ax22, ax23) = plt.subplots(3, 1, figsize=(6, 3.5), sharex=True)
+    # ## x
+    # ax21.plot(traj_gt_time_relative, traj_gt[:,0], linestyle='--', linewidth=1.0, color='r', label='ground truth')
+    # ax21.plot(time1, pose_x_est, linestyle='-', linewidth=0.8, color='b', label='estimate')
+    # ax21.set_ylabel('x [m]', fontsize=10)
+    # ax21.tick_params(labelsize=9)
+    # ax21.legend(loc='upper right', fontsize=6, edgecolor='w')
+    # ax21.grid(linestyle="--")
+    # ## y
+    # ax22.plot(traj_gt_time_relative, traj_gt[:,1], linestyle='--', linewidth=1.0, color='r')
+    # ax22.plot(time1, pose_y_est, linestyle='-', linewidth=0.8, color='b')
+    # ax22.set_ylabel('y [m]', fontsize=10)
+    # ax22.tick_params(labelsize=9)
+    # ax22.grid(linestyle="--")
+    # ## z
+    # ax23.plot(traj_gt_time_relative, traj_gt[:,2], linestyle='--', linewidth=1.0, color='r')
+    # ax23.plot(time1, pose_z_est, linestyle='-', linewidth=0.8, color='b')
+    # ax23.set_xlabel('t [s]', fontsize=10)
+    # ax23.set_ylabel('z [m]', fontsize=10)
+    # ax23.tick_params(labelsize=9)
+    # ax23.grid(linestyle="--")
 
     ###    plot position error of x/y/z    ###
     time2 = []
@@ -186,15 +186,16 @@ if __name__=="__main__":
         diff_x.append(x2-x1)
         diff_y.append(y2-y1)
         diff_z.append(z2-z1)
-    fig3, ax3 = plt.subplots(figsize=(6, 3))
+    fig3, ax3 = plt.subplots(figsize=(3.0, 2.5))
     ax3.plot(time2, diff_x, linewidth=1.0, color='r', label='x')
     ax3.plot(time2, diff_y, linewidth=1.0, color='g', label='y')
     ax3.plot(time2, diff_z, linewidth=1.0, color='b', label='z')
-    ax3.set_xlabel('t [s]', fontsize=10)
+    ax3.set_xlabel('t [s]', fontsize=8)
     ax3.set_ylabel('translation err. [m]', fontsize=10)
-    ax3.tick_params(labelsize=9)
-    ax3.legend(loc='upper right', fontsize=8, edgecolor='w')
+    ax3.tick_params(labelsize=7)
+    ax3.legend(loc='upper right', fontsize=7, edgecolor='w')
     ax3.grid(linestyle="--")
+    fig3.savefig("./xyz_error.png", dpi=300, bbox_inches="tight")
 
     plt.show()
     

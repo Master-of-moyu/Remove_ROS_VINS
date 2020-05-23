@@ -1,4 +1,5 @@
 /.git/
 *.pyc
+*.png
 camera_model/build/
 vins_estimator/build/
