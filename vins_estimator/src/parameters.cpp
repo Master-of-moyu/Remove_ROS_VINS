@@ -25,7 +25,7 @@ std::string EX_CALIB_RESULT_PATH;
 std::string VINS_RESULT_PATH;
 int LOOP_CLOSURE = 0;
 int MIN_LOOP_NUM;
-std::string CAM_NAMES_ESTIMATOR;   //add
+std::string CAM_NAMES_ESTIMATOR; //add
 std::string PATTERN_FILE;
 std::string VOC_FILE;
 std::string IMAGE_TOPIC;
@@ -54,21 +54,15 @@ float VISUALLOOKATX;
 float VISUALLOOKATY;
 float VISUALLOOKATZ;
 
-void readParameters(const string & config_file)
-{
-
-
+void readParameters(const string &config_file) {
     cv::FileStorage fsSettings(config_file.c_str(), cv::FileStorage::READ);
-    if(!fsSettings.isOpened())
-    {
+    if (!fsSettings.isOpened()) {
         std::cerr << "ERROR: Wrong path to settings " << config_file << std::endl;
     }
 
+    VINS_FOLDER_PATH = getcwd(NULL, FILENAMEPATH_MAX);
+    //   fsSettings["output_path"] >> VINS_RESULT_PATH;
 
-    VINS_FOLDER_PATH = getcwd(NULL,FILENAMEPATH_MAX);
- //   fsSettings["output_path"] >> VINS_RESULT_PATH;
-
-   
     fsSettings["image_topic"] >> IMAGE_TOPIC;
     fsSettings["imu_topic"] >> IMU_TOPIC;
     fsSettings["visualLookAtX"] >> VISUALLOOKATX;
@@ -95,28 +89,24 @@ void readParameters(const string & config_file)
     G.z() = fsSettings["g_norm"];
 
     ESTIMATE_EXTRINSIC = fsSettings["estimate_extrinsic"];
-    if (ESTIMATE_EXTRINSIC == 2)
-    {
-      //  ROS_WARN("have no prior about extrinsic param, calibrate extrinsic param");
-	cout << "WARN: have no prior about extrinsic param, calibrate extrinsic param" << endl;
+    if (ESTIMATE_EXTRINSIC == 2) {
+        //  ROS_WARN("have no prior about extrinsic param, calibrate extrinsic param");
+        cout << "WARN: have no prior about extrinsic param, calibrate extrinsic param" << endl;
         RIC.push_back(Eigen::Matrix3d::Identity());
         TIC.push_back(Eigen::Vector3d::Zero());
         fsSettings["ex_calib_result_path"] >> EX_CALIB_RESULT_PATH;
         EX_CALIB_RESULT_PATH = VINS_FOLDER_PATH + EX_CALIB_RESULT_PATH;
 
-    }
-    else 
-    {
-        if ( ESTIMATE_EXTRINSIC == 1)
-        {
-          //  ROS_WARN(" Optimize extrinsic param around initial guess!");
-	  cout << "WARN: Optimize extrinsic param around initial guess!" << endl;
+    } else {
+        if (ESTIMATE_EXTRINSIC == 1) {
+            //  ROS_WARN(" Optimize extrinsic param around initial guess!");
+            cout << "WARN: Optimize extrinsic param around initial guess!" << endl;
             fsSettings["ex_calib_result_path"] >> EX_CALIB_RESULT_PATH;
             EX_CALIB_RESULT_PATH = VINS_FOLDER_PATH + EX_CALIB_RESULT_PATH;
         }
         if (ESTIMATE_EXTRINSIC == 0)
-          //  ROS_WARN(" fix extrinsic param ");
-	  cout << "WARN: fix extrinsic param "<< endl;
+            //  ROS_WARN(" fix extrinsic param ");
+            cout << "WARN: fix extrinsic param " << endl;
 
         cv::Mat cv_R, cv_T;
         fsSettings["extrinsicRotation"] >> cv_R;
@@ -129,32 +119,30 @@ void readParameters(const string & config_file)
         eigen_R = Q.normalized();
         RIC.push_back(eigen_R);
         TIC.push_back(eigen_T);
-     //   ROS_INFO_STREAM("Extrinsic_R : " << std::endl << RIC[0]);
-    //    ROS_INFO_STREAM("Extrinsic_T : " << std::endl << TIC[0].transpose());
-	cout << "Extrinsic_R : " << std::endl << RIC[0] << endl;
-	cout << "Extrinsic_T : " << std::endl << TIC[0].transpose() << endl;
-        
-    } 
-
-
+        //   ROS_INFO_STREAM("Extrinsic_R : " << std::endl << RIC[0]);
+        //    ROS_INFO_STREAM("Extrinsic_T : " << std::endl << TIC[0].transpose());
+        cout << "Extrinsic_R : " << std::endl
+             << RIC[0] << endl;
+        cout << "Extrinsic_T : " << std::endl
+             << TIC[0].transpose() << endl;
+    }
 
     LOOP_CLOSURE = fsSettings["loop_closure"];
-    if (LOOP_CLOSURE == 1)
-    {
-        fsSettings["voc_file"] >> VOC_FILE;;
+    if (LOOP_CLOSURE == 1) {
+        fsSettings["voc_file"] >> VOC_FILE;
+        ;
         fsSettings["pattern_file"] >> PATTERN_FILE;
         VOC_FILE = VINS_FOLDER_PATH + VOC_FILE;
         PATTERN_FILE = VINS_FOLDER_PATH + PATTERN_FILE;
         MIN_LOOP_NUM = fsSettings["min_loop_num"];
-        CAM_NAMES_ESTIMATOR = config_file;   //add
+        CAM_NAMES_ESTIMATOR = config_file; //add
     }
-
 
     INIT_DEPTH = 5.0;
     BIAS_ACC_THRESHOLD = 0.1;
     BIAS_GYR_THRESHOLD = 0.1;
     MAX_KEYFRAME_NUM = 1000;
-    
+
     // feature tracker
     fsSettings["image_topic"] >> IMAGE_TOPIC;
     fsSettings["imu_topic"] >> IMU_TOPIC;
@@ -162,23 +150,23 @@ void readParameters(const string & config_file)
     MIN_DIST = fsSettings["min_dist"];
     ROW = fsSettings["image_height"];
     COL = fsSettings["image_width"];
-   FREQ = fsSettings["freq"];
+    FREQ = fsSettings["freq"];
     F_THRESHOLD = fsSettings["F_threshold"];
     SHOW_TRACK = fsSettings["show_track"];
-   EQUALIZE = fsSettings["equalize"];
+    EQUALIZE = fsSettings["equalize"];
     FISHEYE = fsSettings["fisheye"];
     if (FISHEYE == 1)
         FISHEYE_MASK = VINS_FOLDER_PATH + "/src/config/fisheye_mask.jpg";
     CAM_NAMES.push_back(config_file);
-	//ROS_INFO_STREAM("CAM_NAMES" << CAM_NAMES.front());
+    //ROS_INFO_STREAM("CAM_NAMES" << CAM_NAMES.front());
     WINDOW_SIZE_FEATURE_TRACKER = 20;
     STEREO_TRACK = false;
     FOCAL_LENGTH = 460;
-    PUB_THIS_FRAME = false; 
+    PUB_THIS_FRAME = false;
 
     MIN_PARALLAX = MIN_PARALLAX / FOCAL_LENGTH;
     if (FREQ == 0)
         FREQ = 100;
-   
+
     fsSettings.release();
 }

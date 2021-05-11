@@ -12,11 +12,11 @@
 
 const int NUM_THREADS = 4;
 
-struct ResidualBlockInfo
-{
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-    ResidualBlockInfo(ceres::CostFunction *_cost_function, ceres::LossFunction *_loss_function, std::vector<double *> _parameter_blocks, std::vector<int> _drop_set)
-        : cost_function(_cost_function), loss_function(_loss_function), parameter_blocks(_parameter_blocks), drop_set(_drop_set) {}
+struct ResidualBlockInfo {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+    ResidualBlockInfo(ceres::CostFunction *_cost_function, ceres::LossFunction *_loss_function, std::vector<double *> _parameter_blocks, std::vector<int> _drop_set) :
+        cost_function(_cost_function), loss_function(_loss_function), parameter_blocks(_parameter_blocks), drop_set(_drop_set) {
+    }
 
     void Evaluate();
 
@@ -29,26 +29,23 @@ struct ResidualBlockInfo
     std::vector<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>> jacobians;
     Eigen::VectorXd residuals;
 
-    int localSize(int size)
-    {
+    int localSize(int size) {
         return size == 7 ? 6 : size;
     }
 };
 
-struct ThreadsStruct
-{
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+struct ThreadsStruct {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     std::vector<ResidualBlockInfo *> sub_factors;
     Eigen::MatrixXd A;
     Eigen::VectorXd b;
     std::unordered_map<long, int> parameter_block_size; //global size
-    std::unordered_map<long, int> parameter_block_idx; //local size
+    std::unordered_map<long, int> parameter_block_idx;  //local size
 };
 
-class MarginalizationInfo
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class MarginalizationInfo {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     ~MarginalizationInfo();
     int localSize(int size) const;
     int globalSize(int size) const;
@@ -71,15 +68,13 @@ class MarginalizationInfo
     Eigen::MatrixXd linearized_jacobians;
     Eigen::VectorXd linearized_residuals;
     const double eps = 1e-8;
-
 };
 
-class MarginalizationFactor : public ceres::CostFunction
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-    MarginalizationFactor(MarginalizationInfo* _marginalization_info);
+class MarginalizationFactor : public ceres::CostFunction {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+    MarginalizationFactor(MarginalizationInfo *_marginalization_info);
     virtual bool Evaluate(double const *const *parameters, double *residuals, double **jacobians) const;
 
-    MarginalizationInfo* marginalization_info;
+    MarginalizationInfo *marginalization_info;
 };

@@ -14,7 +14,7 @@
 #include "camodocal/camera_models/PinholeCamera.h"
 
 #include "../parameters.h"
-#include "tic_toc.h"
+#include "../utility/tic_toc.h"
 
 using namespace std;
 using namespace camodocal;
@@ -25,10 +25,9 @@ bool inBorder(const cv::Point2f &pt);
 void reduceVector(vector<cv::Point2f> &v, vector<uchar> status);
 void reduceVector(vector<int> &v, vector<uchar> status);
 
-class FeatureTracker
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class FeatureTracker {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     FeatureTracker();
 
     void readImage(const cv::Mat &_img);

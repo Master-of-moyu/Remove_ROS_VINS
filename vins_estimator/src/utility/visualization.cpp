@@ -269,10 +269,8 @@ void pubTF(const Estimator &estimator, const std_msgs::Header &header, Eigen::Ve
 }
 #endif
 void pubOdometry(const Estimator &estimator, const std_msgs::Header &header, Eigen::Vector3d loop_correct_t,
-                Eigen::Matrix3d loop_correct_r)
-{
-    if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR)
-    {
+                 Eigen::Matrix3d loop_correct_r) {
+    if (estimator.solver_flag == Estimator::SolverFlag::NON_LINEAR) {
         Vector3d correct_t;
         Vector3d correct_v;
         Quaterniond correct_q;

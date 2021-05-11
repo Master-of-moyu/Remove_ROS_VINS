@@ -58,14 +58,13 @@ extern int COL;
 extern int FOCAL_LENGTH;
 //const int NUM_OF_CAM = 1;
 
-
 extern std::string IMAGE_TOPIC;
 extern std::string IMU_TOPIC;
 extern std::string FISHEYE_MASK;
 extern std::vector<std::string> CAM_NAMES;
 extern int MAX_CNT;
 extern int MIN_DIST;
-extern  int WINDOW_SIZE_FEATURE_TRACKER;
+extern int WINDOW_SIZE_FEATURE_TRACKER;
 extern int FREQ;
 extern double F_THRESHOLD;
 extern int SHOW_TRACK;
@@ -74,17 +73,15 @@ extern int EQUALIZE;
 extern int FISHEYE;
 extern bool PUB_THIS_FRAME;
 
-void readParameters(const string & );
+void readParameters(const string &);
 
-enum SIZE_PARAMETERIZATION
-{
+enum SIZE_PARAMETERIZATION {
     SIZE_POSE = 7,
     SIZE_SPEEDBIAS = 9,
     SIZE_FEATURE = 1
 };
 
-enum StateOrder
-{
+enum StateOrder {
     O_P = 0,
     O_R = 3,
     O_V = 6,
@@ -92,8 +89,7 @@ enum StateOrder
     O_BG = 12
 };
 
-enum NoiseOrder
-{
+enum NoiseOrder {
     O_AN = 0,
     O_GN = 3,
     O_AW = 6,

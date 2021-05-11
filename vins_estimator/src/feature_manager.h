@@ -15,12 +15,10 @@ using namespace Eigen;
 #include <assert.h>
 #include "parameters.h"
 
-class FeaturePerFrame
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-    FeaturePerFrame(const Vector3d &_point)
-    {
+class FeaturePerFrame {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+    FeaturePerFrame(const Vector3d &_point) {
         z = _point(2);
         point = _point / z;
     }
@@ -33,10 +31,9 @@ class FeaturePerFrame
     double dep_gradient;
 };
 
-class FeaturePerId
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class FeaturePerId {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     const int feature_id;
     int start_frame;
     vector<FeaturePerFrame> feature_per_frame;
@@ -49,19 +46,17 @@ class FeaturePerId
 
     Vector3d gt_p;
 
-    FeaturePerId(int _feature_id, int _start_frame)
-        : feature_id(_feature_id), start_frame(_start_frame),
-          used_num(0), estimated_depth(-1.0), solve_flag(0)
-    {
+    FeaturePerId(int _feature_id, int _start_frame) :
+        feature_id(_feature_id), start_frame(_start_frame),
+        used_num(0), estimated_depth(-1.0), solve_flag(0) {
     }
 
     int endFrame();
 };
 
-class FeatureManager
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class FeatureManager {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     FeatureManager(Matrix3d _Rs[]);
 
     void setRic(Matrix3d _ric[]);
@@ -87,7 +82,7 @@ class FeatureManager
     list<FeaturePerId> feature;
     int last_track_num;
 
-  private:
+private:
     double compensatedParallax2(const FeaturePerId &it_per_id, int frame_count);
     const Matrix3d *Rs;
     Matrix3d ric[NUM_OF_CAM];

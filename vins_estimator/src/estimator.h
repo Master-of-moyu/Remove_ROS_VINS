@@ -23,9 +23,8 @@
 #include <queue>
 #include <opencv2/core/eigen.hpp>
 
-struct RetriveData
-{
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+struct RetriveData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     /* data */
     int old_index;
     int cur_index;
@@ -33,7 +32,7 @@ struct RetriveData
     Vector3d P_old;
     Matrix3d R_old;
     vector<cv::Point2f> measurements;
-    vector<int> features_ids; 
+    vector<int> features_ids;
     bool relocalized;
     bool relative_pose;
     Vector3d relative_t;
@@ -42,10 +41,9 @@ struct RetriveData
     double loop_pose[7];
 };
 
-class Estimator
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class Estimator {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     Estimator();
 
     void setParameter();
@@ -68,21 +66,18 @@ class Estimator
     void double2vector();
     bool failureDetection();
 
-
-    enum SolverFlag
-    {
+    enum SolverFlag {
         INITIAL,
         NON_LINEAR
     };
 
-    enum MarginalizationFlag
-    {
+    enum MarginalizationFlag {
         MARGIN_OLD = 0,
         MARGIN_SECOND_NEW = 1
     };
 
     SolverFlag solver_flag;
-    MarginalizationFlag  marginalization_flag;
+    MarginalizationFlag marginalization_flag;
     Vector3d g;
     MatrixXd Ap[2], backup_A;
     VectorXd bp[2], backup_b;
@@ -123,7 +118,6 @@ class Estimator
     vector<Vector3d> key_poses;
     double initial_timestamp;
 
-
     double para_Pose[WINDOW_SIZE + 1][SIZE_POSE];
     double para_SpeedBias[WINDOW_SIZE + 1][SIZE_SPEEDBIAS];
     double para_Feature[NUM_OF_F][SIZE_FEATURE];
@@ -142,5 +136,4 @@ class Estimator
 
     map<double, ImageFrame> all_image_frame;
     IntegrationBase *tmp_pre_integration;
-
 };

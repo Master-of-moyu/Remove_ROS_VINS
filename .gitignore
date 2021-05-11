@@ -3,3 +3,6 @@
 *.png
 camera_model/build/
 vins_estimator/build/
+*.vscode
+.DS_Store
+*.csv

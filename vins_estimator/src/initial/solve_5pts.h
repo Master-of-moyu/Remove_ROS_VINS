@@ -10,14 +10,13 @@ using namespace Eigen;
 
 //#include <ros/console.h>
 
-class MotionEstimator
-{
-  public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+class MotionEstimator {
+public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     bool solveRelativeRT(const vector<pair<Vector3d, Vector3d>> &corres, Matrix3d &R, Vector3d &T);
 
-  private:
+private:
     double testTriangulation(const vector<cv::Point2f> &l,
                              const vector<cv::Point2f> &r,
                              cv::Mat_<double> R, cv::Mat_<double> t);
@@ -25,5 +24,3 @@ class MotionEstimator
                     cv::Mat_<double> &R1, cv::Mat_<double> &R2,
                     cv::Mat_<double> &t1, cv::Mat_<double> &t2);
 };
-
-
