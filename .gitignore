@@ -6,3 +6,5 @@ vins_estimator/build/
 *.vscode
 .DS_Store
 *.csv
+build**
+estimate_result.txt

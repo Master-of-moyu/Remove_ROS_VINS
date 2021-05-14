@@ -1,4 +1,4 @@
-#include "camodocal/calib/CameraCalibration.h"
+#include "../include/CameraCalibration.h"
 
 #include <cstdio>
 #include <eigen3/Eigen/Dense>
@@ -11,11 +11,11 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/sparse_graph/Transform.h"
-#include "camodocal/gpl/EigenQuaternionParameterization.h"
-#include "camodocal/gpl/EigenUtils.h"
-#include "camodocal/camera_models/CostFunctionFactory.h"
+#include "../include/CameraFactory.h"
+#include "../include/Transform.h"
+#include "../include/EigenQuaternionParameterization.h"
+#include "../include/EigenUtils.h"
+#include "../include/CostFunctionFactory.h"
 
 #include "ceres/ceres.h"
 namespace camodocal {

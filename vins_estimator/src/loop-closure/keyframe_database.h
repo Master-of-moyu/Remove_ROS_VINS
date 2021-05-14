@@ -11,9 +11,9 @@
 //#include <nav_msgs/Path.h>
 //#include <nav_msgs/Odometry.h>
 //#include <geometry_msgs/PointStamped.h>
-#include "../../include/Path.h"
-#include "../../include/Odometry.h"
-#include "../../include/PointStamped"
+#include "../../../include/Path.h"
+#include "../../../include/Odometry.h"
+#include "../../../include/PointStamped"
 
 class KeyFrameDatabase {
 public:

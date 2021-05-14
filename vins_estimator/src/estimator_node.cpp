@@ -14,9 +14,9 @@
 #include "loop-closure/loop_closure.h"
 #include "loop-closure/keyframe.h"
 #include "loop-closure/keyframe_database.h"
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/camera_models/CataCamera.h"
-#include "camodocal/camera_models/PinholeCamera.h"
+#include "../../camera_model/include/CameraFactory.h"
+#include "../../camera_model/include/CataCamera.h"
+#include "../../camera_model/include/PinholeCamera.h"
 /****************** load image section ***********************/
 #include <iostream>
 #include <fstream>

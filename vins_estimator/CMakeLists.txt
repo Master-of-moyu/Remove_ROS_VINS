@@ -7,17 +7,11 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 # set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g -pthread -fopenmp")
 
 include_directories(${CMAKE_SOURCE_DIR}/../camera_model/include)
-#add_library( lib_camera_model STATIC IMPORTED )
-#set_target_properties(lib_camera_model PROPERTIES IMPORTED_LOCATION  ${CMAKE_SOURCE_DIR}/../camera_model/build/libcamera_model.a)
 
 find_package(Ceres REQUIRED)
 find_package(OpenCV REQUIRED)
 
 include_directories(${CERES_INCLUDE_DIRS})
-
-#message("CERES_INCLUDE_DIR:" ${CERES_INCLUDE_DIR}  " CERES_LIBS: "  ${CERES_LIBRARIES} )
-#set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-#message("CMAKE MOUDLE PATH:", ${CMAKE_MODULE_PATH})
 #find_package(Eigen3  REQUIRED)
 include_directories(
 # ${EIGEN3_INCLUDE_DIR}
@@ -60,18 +54,18 @@ add_executable(vins_estimator
     src/loop-closure/keyframe_database.cpp
     src/feature_tracker/feature_tracker.cpp 
   #  src/feature_tracker/feature_tracker_parameters.cpp
-    ../camera_model/src/chessboard/Chessboard.cc
-    ../camera_model/src/calib/CameraCalibration.cc
-    ../camera_model/src/camera_models/Camera.cc
-    ../camera_model/src/camera_models/CameraFactory.cc
-    ../camera_model/src/camera_models/CostFunctionFactory.cc
-    ../camera_model/src/camera_models/PinholeCamera.cc
-    ../camera_model/src/camera_models/CataCamera.cc
-    ../camera_model/src/camera_models/EquidistantCamera.cc
-    ../camera_model/src/camera_models/ScaramuzzaCamera.cc
-    ../camera_model/src/sparse_graph/Transform.cc
-    ../camera_model/src/gpl/gpl.cc
-    ../camera_model/src/gpl/EigenQuaternionParameterization.cc
+    ../camera_model/src/Chessboard.cc
+    ../camera_model/src/CameraCalibration.cc
+    ../camera_model/src/Camera.cc
+    ../camera_model/src/CameraFactory.cc
+    ../camera_model/src/CostFunctionFactory.cc
+    ../camera_model/src/PinholeCamera.cc
+    ../camera_model/src/CataCamera.cc
+    ../camera_model/src/EquidistantCamera.cc
+    ../camera_model/src/ScaramuzzaCamera.cc
+    ../camera_model/src/Transform.cc
+    ../camera_model/src/gpl.cc
+    ../camera_model/src/EigenQuaternionParameterization.cc
 )
 
 target_link_libraries(

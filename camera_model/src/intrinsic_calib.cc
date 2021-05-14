@@ -8,9 +8,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include "camodocal/chessboard/Chessboard.h"
-#include "camodocal/calib/CameraCalibration.h"
-#include "camodocal/gpl/gpl.h"
+#include "Chessboard.h"
+#include "CameraCalibration.h"
+#include "gpl.h"
 
 int main(int argc, char **argv) {
     cv::Size boardSize;

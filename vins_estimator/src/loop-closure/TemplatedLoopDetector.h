@@ -22,11 +22,11 @@
 #include "ThirdParty/DBoW/QueryResults.h"
 #include "ThirdParty/DBoW/BowVector.h"
 
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/camera_models/CataCamera.h"
-#include "camodocal/camera_models/EquidistantCamera.h"
-#include "camodocal/camera_models/PinholeCamera.h"
-#include "camodocal/camera_models/ScaramuzzaCamera.h"
+#include "../../../camera_model/include/CameraFactory.h"
+#include "../../../camera_model/include/CataCamera.h"
+#include "../../../camera_model/include/EquidistantCamera.h"
+#include "../../../camera_model/include/PinholeCamera.h"
+#include "../../../camera_model/include/ScaramuzzaCamera.h"
 
 using namespace std;
 using namespace DBoW2;

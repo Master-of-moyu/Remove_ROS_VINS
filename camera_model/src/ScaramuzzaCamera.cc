@@ -1,4 +1,4 @@
-#include "camodocal/camera_models/ScaramuzzaCamera.h"
+#include "../include/ScaramuzzaCamera.h"
 
 #include <cmath>
 #include <cstdio>
@@ -12,7 +12,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include "camodocal/gpl/gpl.h"
+#include "../include/gpl.h"
 
 Eigen::VectorXd polyfit(Eigen::VectorXd &xVec, Eigen::VectorXd &yVec, int poly_order) {
     assert(poly_order > 0);

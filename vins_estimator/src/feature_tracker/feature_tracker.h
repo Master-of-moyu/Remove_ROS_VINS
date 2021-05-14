@@ -9,9 +9,9 @@
 #include <opencv2/opencv.hpp>
 #include <eigen3/Eigen/Dense>
 
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/camera_models/CataCamera.h"
-#include "camodocal/camera_models/PinholeCamera.h"
+#include "../../../camera_model/include/CameraFactory.h"
+#include "../../../camera_model/include/CataCamera.h"
+#include "../../../camera_model/include/PinholeCamera.h"
 
 #include "../parameters.h"
 #include "../utility/tic_toc.h"

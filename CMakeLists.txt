@@ -1,1 +1,6 @@
-/opt/ros/indigo/share/catkin/cmake/toplevel.cmake
+cmake_minimum_required(VERSION 3.13)
+project(VINS)
+
+add_subdirectory(camera_model)
+
+add_subdirectory(vins_estimator)

@@ -5,15 +5,16 @@
 #include <eigen3/Eigen/Dense>
 #include <opencv2/core/eigen.hpp>
 #include <opencv2/opencv.hpp>
-#include "../utility/utility.h"
 #include <algorithm>
+#include <mutex>
+
 #include "math.h"
 #include "../estimator.h"
 #include "../parameters.h"
-#include "camodocal/camera_models/CameraFactory.h"
-#include "camodocal/camera_models/CataCamera.h"
-#include "camodocal/camera_models/PinholeCamera.h"
-#include <mutex>
+#include "../utility/utility.h"
+#include "../../../camera_model/include/CameraFactory.h"
+#include "../../../camera_model/include/CataCamera.h"
+#include "../../../camera_model/include/PinholeCamera.h"
 #include "loop_closure.h"
 
 using namespace Eigen;
